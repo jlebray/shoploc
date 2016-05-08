@@ -1,4 +1,4 @@
-chain, name, latitude, longitude, address, city, zip, department, phone, hours, store_id, is_address_computed, is_location_computed, key, ignored, ignore_reason, overload_chain_name, mandatory_coords, country_code
+chain,name,latitude,longitude,address,city,zip,department,phone,hours,store_id,is_address_computed,is_location_computed,key,ignored,ignore_reason,overload_chain_name,mandatory_coords,country_code
 shopmium,Shopmium Poissy,48.92820769999999,2.0446661,119 rue du General de Gaulle,Poissy,78300,,0130068308,[],,true,true,sfr:01 30 06 83 08,false,,,true,fr
 shopmium,Shopmium Osny,49.0700239,2.062715,c.cial Leclerc chemin des Hayette la Croix Saint Emilion Cellule D36,Osny,95520,,0130170088,[],,true,true,sfr:01 30 17 00 88,false,,,true,fr
 shopmium,Shopmium Rambouillet,48.6440114,1.8232859,74 av General de Gaulle,Rambouillet,78120,,0130462988,[],,true,true,sfr:01 30 46 29 88,false,,,true,fr
