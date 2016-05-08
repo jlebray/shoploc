@@ -2,7 +2,7 @@ class CreateShops < ActiveRecord::Migration
   def change
     create_table :shops do |t|
       t.string :chain
-      t.string :name, null:false
+      t.string :name
       t.decimal :latitude, precision: 9, scale: 7, null:false
       t.decimal :longitude, precision: 10, scale: 7, null:false
       t.string :address

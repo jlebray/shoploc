@@ -1,0 +1,46 @@
+<div id="create">
+  <h1>New shop</h1>
+  <%= form_for :shop do |shop| %>
+    <p>
+      <%= shop.label :chain%><br>
+      <%= shop.text_field :chain%>
+    </p>
+    <p>
+      <%= shop.label :name%><br>
+      <%= shop.text_field :name%>
+    </p>
+    <p>
+      <%= shop.label :latitude%><br>
+      <%= shop.text_field :latitude%>
+    </p>
+    <p>
+      <%= shop.label :longitude%><br>
+      <%= shop.text_field :longitude%>
+    </p>
+    <p>
+      <%= shop.label :address%><br>
+      <%= shop.text_field :address%>
+    </p>
+    <p>
+      <%= shop.label :city%><br>
+      <%= shop.text_field :city%>
+    </p>
+    <p>
+      <%= shop.label :zip%><br>
+      <%= shop.text_field :zip%>
+    </p>
+    <p>
+      <%= shop.label :phone%><br>
+      <%= shop.text_field :phone%>
+    </p>
+    <p>
+      <%= shop.label :country_code%><br>
+      <%= shop.text_field :country_code%>
+    </p>
+    <p>
+      <%= shop.submit %>
+    </p>
+  <% end %>
+
+</div>
+
