@@ -1,46 +1,47 @@
-<div id="create">
-  <h1>New shop</h1>
-  <%= form_for :shop do |shop| %>
-    <p>
-      <%= shop.label :chain%><br>
-      <%= shop.text_field :chain%>
-    </p>
-    <p>
-      <%= shop.label :name%><br>
-      <%= shop.text_field :name%>
-    </p>
-    <p>
-      <%= shop.label :latitude%><br>
-      <%= shop.text_field :latitude%>
-    </p>
-    <p>
-      <%= shop.label :longitude%><br>
-      <%= shop.text_field :longitude%>
-    </p>
-    <p>
-      <%= shop.label :address%><br>
-      <%= shop.text_field :address%>
-    </p>
-    <p>
-      <%= shop.label :city%><br>
-      <%= shop.text_field :city%>
-    </p>
-    <p>
-      <%= shop.label :zip%><br>
-      <%= shop.text_field :zip%>
-    </p>
-    <p>
-      <%= shop.label :phone%><br>
-      <%= shop.text_field :phone%>
-    </p>
-    <p>
-      <%= shop.label :country_code%><br>
-      <%= shop.text_field :country_code%>
-    </p>
-    <p>
-      <%= shop.submit %>
-    </p>
-  <% end %>
+<p id="notice"><%= notice %></p>
 
-</div>
+<h1>Listing Shops</h1>
 
+<table class="table table-condensed table-responsive">
+  <thead>
+    <tr>
+      <th>Chain</th>
+      <th>Name</th>
+      <th>Latitude</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>Longitude</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>Zip</th>
+      <th>Phone</th>
+      <th>Country code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @shops.each do |shop| %>
+      <tr>
+        <td><%= shop.chain %></td>
+        <td><%= shop.name %></td>
+        <td><%= shop.latitude %></td>
+        <td><%= shop.latitude %></td>
+        <td><%= shop.longitude %></td>
+        <td><%= shop.longitude %></td>
+        <td><%= shop.address %></td>
+        <td><%= shop.city %></td>
+        <td><%= shop.zip %></td>
+        <td><%= shop.phone %></td>
+        <td><%= shop.country_code %></td>
+        <td><%= link_to 'Show', shop,class:'btn btn-info' %></td>
+        <td><%= link_to 'Edit', edit_shop_path(shop), class:'btn btn-primary' %></td>
+        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger'%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Shop', new_shop_path %>
