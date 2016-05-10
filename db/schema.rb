@@ -15,16 +15,16 @@ ActiveRecord::Schema.define(version: 20160508103328) do
 
   create_table "shops", force: :cascade do |t|
     t.string   "chain"
-    t.string   "name",                                            null: false
-    t.decimal  "latitude",               precision: 9,  scale: 7, null: false
-    t.decimal  "longitude",              precision: 10, scale: 7, null: false
+    t.string   "name"
+    t.decimal  "latitude",     precision: 9,  scale: 7
+    t.decimal  "longitude",    precision: 10, scale: 7
     t.string   "address"
     t.string   "city"
     t.integer  "zip"
     t.integer  "phone"
-    t.string   "country_code", limit: 3
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "country_code"
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
   end
 
 end

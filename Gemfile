@@ -9,6 +9,8 @@ gem 'bootstrap_form'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'geokit'
+gem 'geokit-rails'
 # gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library

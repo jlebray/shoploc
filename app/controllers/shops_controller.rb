@@ -62,12 +62,10 @@ class ShopsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_shop
       @shop = Shop.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
       params.require(:shop).permit(:chain, :name, :latitude, :latitude, :longitude, :longitude, :address, :city, :zip, :phone, :country_code)
     end

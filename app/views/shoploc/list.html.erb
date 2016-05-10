@@ -1,0 +1,44 @@
+
+
+<p id="notice"><%= notice %></p>
+
+<h1>Shops within <%= @radius.to_s %> kms from <%= @origin.to_s %> </h1>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-4'>
+    </div>
+    <div class='col-md-8'>
+      <table class="table table-condensed table-responsive">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Distance</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @shops.each do |shop| %>
+            <tr>
+              <td><%= shop.name %></td>
+              <td><%= shop.address %></td>
+              <td><%= shop.city %></td>
+              <td><%= shop.phone %></td>
+              <% if (d = shop.distance_to @origin, units: :kms) < 1 %>
+                <td><%= (d * 100).round %> m</td>
+              <% else %>
+                <td><%= d.round(2) %> km</td>
+              <% end %>          
+              <td><%= link_to 'Show', shop,class:'btn btn-info' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+

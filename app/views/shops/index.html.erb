@@ -1,6 +1,10 @@
+<script>
+  $('#shop_list').addClass('active');
+</script>
+
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Shops</h1>
+<h1>Shop list</h1>
 
 <table class="table table-condensed table-responsive">
   <thead>
@@ -8,8 +12,6 @@
       <th>Chain</th>
       <th>Name</th>
       <th>Latitude</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
       <th>Longitude</th>
       <th>Address</th>
       <th>City</th>
@@ -26,8 +28,6 @@
         <td><%= shop.chain %></td>
         <td><%= shop.name %></td>
         <td><%= shop.latitude %></td>
-        <td><%= shop.latitude %></td>
-        <td><%= shop.longitude %></td>
         <td><%= shop.longitude %></td>
         <td><%= shop.address %></td>
         <td><%= shop.city %></td>
