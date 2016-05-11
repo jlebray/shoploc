@@ -62,6 +62,10 @@ class ShopsController < ApplicationController
     end
   end
 
+  def map
+    @shops = Shop.all
+  end
+
   private
     def set_shop
       @shop = Shop.find(params[:id])

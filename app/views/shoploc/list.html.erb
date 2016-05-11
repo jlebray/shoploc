@@ -5,9 +5,12 @@
 <h1 class="text-xs-center">Shops within <%= @radius.to_s %> km of <%= @origin.to_a %> </h1>
 <div class='container'>
   <div class='row'>
-    <div class='col-md-4'>
+    <div class='col-md-12 map-container'>
+      <div id="map" style="height:300px;"></div>
     </div>
-    <div class='col-md-8'>
+  </div>
+  <div class='row'>
+    <div class='col-md-12'>
       <table class="table table-condensed table-responsive">
         <thead>
           <tr>
@@ -41,4 +44,40 @@
   </div>
 </div>
 <br>
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI', 'data-turbolinks-track' => true %>
+<%= javascript_tag "var shops = #{@shops.to_json}" %>
+<%= javascript_tag "var origin = #{@origin.to_json}" %>
+<script>
+  var map = new GMaps({
+    div: '#map',
+      lat: origin.lat,
+      lng: origin.lng
+  });
 
+var userMarker = map.addMarker({
+  lat: origin.lat,
+    lng: origin.lng,
+    title: 'Your position',
+    infoWindow: {
+      content: 'Your position'
+    }
+});
+
+var shops_latlng = []; 
+shops_latlng.push(new google.maps.LatLng({lat: origin.lat, lng: origin.lng}));
+
+var shopIcon = '/assets/small-shop-icon.png';
+for(var i = 0; i < shops.length; i++) {
+  shops_latlng.push(new google.maps.LatLng({lat: parseFloat(shops[i].latitude), lng: parseFloat(shops[i].longitude)}));
+  map.addMarker({
+    lat: shops[i].latitude,
+    lng: shops[i].longitude,
+    title: shops[i].name,
+    icon: shopIcon,
+    infoWindow: {
+      content: 'shop'
+    }
+  });
+}
+map.fitLatLngBounds(shops_latlng);
+</script>

@@ -18,6 +18,13 @@ nav {
   height:100%;
   width:100%;
 }
+
+.map-container {
+  padding:10px;
+  border: 2px solid darkgrey;
+  box-shadow: 0px 0px 7px lightgrey;
+  margin:10px;
+}
 // add asterisk for required field
 label.required:after {
     content:" *";

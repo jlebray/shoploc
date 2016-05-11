@@ -7,17 +7,19 @@
   <div class='row'>
     <div class='col-md-4 border' style="height: 300px">
       <h3> location </h3>
-      <div id="map"></div>
+      <div class="map-container">
+        <div id="map" style="height: 200px"></div>
+      </div>
       <p><strong>Your latitude : </strong><span id="latitude-loc"></span></p>
       <p><strong>Your longitude : </strong><span id="longitude-loc"></span></p>
-        <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
-          <%= f.hidden_field :latitude, id: 'latitude-loc_field' %>  
-          <%= f.hidden_field :longitude, id: 'longitude-loc_field' %>  
-          <%= f.number_field :radius, step: 'any' %>
-          <%= f.form_group do %>
-            <%= f.submit  'Search'%>
-          <% end %>
+      <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
+        <%= f.hidden_field :latitude, id: 'latitude-loc_field' %>  
+        <%= f.hidden_field :longitude, id: 'longitude-loc_field' %>  
+        <%= f.number_field :radius, step: 'any' %>
+        <%= f.form_group do %>
+          <%= f.submit  'Search'%>
         <% end %>
+      <% end %>
     </div>
     <div class='col-md-4'>
       <h3>address</h3>
@@ -37,6 +39,34 @@
     </div>
   </div>
 </div>                               
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI&signed_in=true&callback=initMap"
-  async defer>
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI', 'data-turbolinks-track' => true %>
+<script>
+  var map = new GMaps({
+    div: '#map',
+      lat: 48,
+      lng: 2
+  });
+GMaps.geolocate({
+  success: function(position) {
+    map.setCenter(position.coords.latitude, position.coords.longitude);
+    $("#latitude-loc").text(position.coords.latitude);
+    $("#longitude-loc").text(position.coords.longitude);
+    $("#latitude-loc_field").val(position.coords.latitude);
+    $("#longitude-loc_field").val(position.coords.longitude);
+    map.addMarker({
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+      title: 'Your position',
+      infoWindow: {
+        content: 'Your position'
+      }
+    });
+  },
+  error: function(error) {
+    alert('Geolocation failed: '+error.message);
+  },
+  not_supported: function() {
+    alert("Your browser does not support geolocation");
+  },
+});
 </script>

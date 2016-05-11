@@ -1,0 +1,31 @@
+<div class="map-container">
+  <div id="map" style="height:500px;">
+  </div>
+</div>
+
+<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI', 'data-turbolinks-track' => true %>
+<%= javascript_tag "var shops = #{@shops.to_json}" %>
+<script>
+  var map = new GMaps({
+    div: '#map',
+      lat: 0,
+      lng: 0
+  });
+
+var shops_latlng = []; 
+
+var shopIcon = '/assets/small-shop-icon.png';
+for(var i = 0; i < shops.length; i++) {
+  shops_latlng.push(new google.maps.LatLng({lat: parseFloat(shops[i].latitude), lng: parseFloat(shops[i].longitude)}));
+  map.addMarker({
+    lat: shops[i].latitude,
+    lng: shops[i].longitude,
+    title: shops[i].name,
+    icon: shopIcon,
+    infoWindow: {
+      content: 'shop'
+    }
+  });
+}
+map.fitLatLngBounds(shops_latlng);
+</script>
