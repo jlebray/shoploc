@@ -5,7 +5,9 @@ gem 'rails', '4.2.6'
 gem 'sqlite3'
 gem 'sprockets-rails'
 gem 'bootstrap'
-gem 'tether-rails'
+source 'https://rails-assets.org' do
+    gem 'rails-assets-tether', '>= 1.1.0'
+end
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
 gem 'uglifier', '>= 1.3.0'
