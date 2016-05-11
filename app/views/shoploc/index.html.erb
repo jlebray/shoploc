@@ -1,10 +1,42 @@
-<h1>Shoploc#index</h1>
-<%= bootstrap_form_tag do |f| %>
-  <%= f.number_field :latitude, step: 'any' %>
-  <%= f.number_field :longitude, step: 'any' %>
-  <%= f.number_field :radius, step: 'any' %>
-  <%= f.form_group do %>
-    <%= f.submit %>
-  <% end %>
-<% end %>
-<%#(:origin, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
+<%= stylesheet_link_tag    'shoploc', media: 'all', 'data-turbolinks-track' => true %>
+
+<div class='container text-xs-center'>
+  <div class="row">
+    <h2>Search shops by :</h2>
+  </div>
+  <div class='row'>
+    <div class='col-md-4 border' style="height: 300px">
+      <h3> location </h3>
+      <div id="map"></div>
+      <p><strong>Your latitude : </strong><span id="latitude-loc"></span></p>
+      <p><strong>Your longitude : </strong><span id="longitude-loc"></span></p>
+        <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
+          <%= f.hidden_field :latitude, id: 'latitude-loc_field' %>  
+          <%= f.hidden_field :longitude, id: 'longitude-loc_field' %>  
+          <%= f.number_field :radius, step: 'any' %>
+          <%= f.form_group do %>
+            <%= f.submit  'Search'%>
+          <% end %>
+        <% end %>
+    </div>
+    <div class='col-md-4'>
+      <h3>address</h3>
+    </div>
+    <div class='col-md-4'>
+      <h3>coordinates</h3>
+      <div class="text-xs-left">
+        <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
+          <%= f.number_field :latitude, step: '0.01' %>  
+          <%= f.number_field :longitude, step: '0.01' %>  
+          <%= f.number_field :radius, step: 'any' %>
+          <%= f.form_group do %>
+            <%= f.submit  'Search'%>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>                               
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI&signed_in=true&callback=initMap"
+  async defer>
+</script>

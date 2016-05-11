@@ -1,47 +1,53 @@
-<script>
-  $('#shop_list').addClass('active');
-</script>
+<div class="container-fluid">
+  <%= stylesheet_link_tag    'shops', media: 'all', 'data-turbolinks-track' => true %>
+  <script>
+    $('#shop_list').addClass('active');
+  </script>
 
-<p id="notice"><%= notice %></p>
-
-<h1>Shop list</h1>
-
-<table class="table table-condensed table-responsive">
-  <thead>
-    <tr>
-      <th>Chain</th>
-      <th>Name</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Address</th>
-      <th>City</th>
-      <th>Zip</th>
-      <th>Phone</th>
-      <th>Country code</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @shops.each do |shop| %>
+  <p id="notice"><%= notice %></p>
+  <div class="row">
+    <div class="col-xs-3"><h1>Shop list</h1>
+    </div>
+    <div class="col-xs-3">
+      <%= link_to 'New Shop', new_shop_path, class: 'btn btn-info' %>
+    </div>
+  </div>
+  <table class="table table-condensed table-responsive table-hover">
+    <thead>
       <tr>
-        <td><%= shop.chain %></td>
-        <td><%= shop.name %></td>
-        <td><%= shop.latitude %></td>
-        <td><%= shop.longitude %></td>
-        <td><%= shop.address %></td>
-        <td><%= shop.city %></td>
-        <td><%= shop.zip %></td>
-        <td><%= shop.phone %></td>
-        <td><%= shop.country_code %></td>
-        <td><%= link_to 'Show', shop,class:'btn btn-info' %></td>
-        <td><%= link_to 'Edit', edit_shop_path(shop), class:'btn btn-primary' %></td>
-        <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger'%></td>
+        <th>Chain</th>
+        <th>Name</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Zip</th>
+        <th>Phone</th>
+        <th>Country code</th>
+        <th colspan="3">Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @shops.each do |shop| %>
+        <tr>
+          <td><%= shop.chain %></td>
+          <td><%= shop.name %></td>
+          <td><%= shop.latitude %></td>
+          <td><%= shop.longitude %></td>
+          <td><%= shop.address %></td>
+          <td><%= shop.city %></td>
+          <td><%= shop.zip %></td>
+          <td><%= shop.phone %></td>
+          <td><%= shop.country_code %></td>
+          <td><%= link_to 'Show', shop,class:'btn btn-info' %></td>
+          <td><%= link_to 'Edit', edit_shop_path(shop), class:'btn btn-primary' %></td>
+          <td><%= link_to 'Destroy', shop, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger'%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Shop', new_shop_path %>
+  <br>
+
+</div>

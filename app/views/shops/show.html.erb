@@ -16,16 +16,6 @@
 </p>
 
 <p>
-  <strong>Latitude:</strong>
-  <%= @shop.latitude %>
-</p>
-
-<p>
-  <strong>Longitude:</strong>
-  <%= @shop.longitude %>
-</p>
-
-<p>
   <strong>Longitude:</strong>
   <%= @shop.longitude %>
 </p>
@@ -55,5 +45,6 @@
   <%= @shop.country_code %>
 </p>
 
-<%= link_to 'Edit', edit_shop_path(@shop) %> |
-<%= link_to 'Back', shops_path %>
+<%= link_to 'Edit', edit_shop_path(@shop), class: 'btn btn-info' %>  
+<%= link_to 'Destroy', @shop, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger'%> 
+<%= link_to 'Back', shops_path, class: 'btn btn-default' %>

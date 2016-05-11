@@ -1,7 +1,7 @@
 <div class='.col-md-4'>
-<%= bootstrap_form_for(@shop) do |f| %>
+<%= bootstrap_form_for(@shop, layout: :horizontal) do |f| %>
   <% if @shop.errors.any? %>
-    <div id="error_explanation">
+    <div class="fade in" id="error_explanation">
       <h2><%= pluralize(@shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
 
       <ul>
@@ -21,6 +21,6 @@
     <%= f.number_field :zip %>
     <%= f.number_field :phone %>
     <%= f.text_field :country_code %>
-    <%= f.submit %>
+    <%= f.submit %><span class='text-danger'> (* required field)</span>
 <% end %>
 </div>
