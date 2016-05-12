@@ -7,10 +7,6 @@ class Shop < ActiveRecord::Base
   validates :longitude,
     presence:true,
     inclusion: { in: -180..180}
-  validates :phone, :zip,
-    numericality: true,
-    allow_blank:true
-
   acts_as_mappable default_units: :kms,
     lat_column_name: :latitude,
     lng_column_name: :longitude,

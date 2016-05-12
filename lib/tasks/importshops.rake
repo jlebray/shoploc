@@ -7,8 +7,8 @@ task :importshops ,[:file] => :environment do |t, args|
 
   args.with_defaults file:"#{Rails.root}/public/shops_shopmium.csv"
   
-  CSV.foreach(
-    args.file,
+  CSV.parse(
+    File.read(args.file).gsub(/,\s+/, ","),
     {headers: true}
   ) do |shop|
     Shop.create(
