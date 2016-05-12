@@ -16,6 +16,7 @@
         <%= f.hidden_field :latitude, id: 'latitude-loc_field' %>  
         <%= f.hidden_field :longitude, id: 'longitude-loc_field' %>  
         <%= f.number_field :radius, step: 'any' %>
+        <%= f.number_field :numberOfShops, value: 5 %>
         <%= f.form_group do %>
           <%= f.submit  'Search'%>
         <% end %>
@@ -31,6 +32,7 @@
           <%= f.number_field :latitude, step: '0.01' %>  
           <%= f.number_field :longitude, step: '0.01' %>  
           <%= f.number_field :radius, step: 'any' %>
+          <%= f.number_field :numberOfShops, value: 5 %>
           <%= f.form_group do %>
             <%= f.submit  'Search'%>
           <% end %>
@@ -67,5 +69,15 @@ GMaps.geolocate({
   not_supported: function() {
     alert("Your browser does not support geolocation");
   },
+});
+var radiusCircle = map.drawCircle({
+  lat: origin.lat,
+    lng: origin.lng,
+    radius: 0,
+    fillOpacity: 0.2,
+    fillColor: '#FF1212',
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
 });
 </script>

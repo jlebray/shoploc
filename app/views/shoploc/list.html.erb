@@ -2,8 +2,16 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1 class="text-xs-center">Shops within <%= @radius.to_s %> km of <%= @origin.to_a %> </h1>
+<p><h1 class="text-xs-center"><%= pluralize(@shops.size, 'shop') %> within <%= @radius.to_s %> km of <%= @origin.to_a %> </h1></p>
 <div class='container'>
+  <% if @shops.empty? %>
+    <div class='row'>
+      <div class='col-md-12'>
+        <p><h1 class="text-xs-center"> No shops found. </h1></p>
+      </div>
+    </div>
+  </div>
+<% else %>
   <div class='row'>
     <div class='col-md-12 map-container'>
       <div id="map" style="height:300px;"></div>
@@ -46,6 +54,7 @@
 <br>
 <%= javascript_tag "var shops = #{@shops.to_json}" %>
 <%= javascript_tag "var origin = #{@origin.to_json}" %>
+<%= javascript_tag "var radius = #{@radius}" %>
 <script>
   var map = new GMaps({
     div: '#map',
@@ -66,4 +75,16 @@ var shops_latlng = [];
 shops_latlng.push(new google.maps.LatLng({lat: origin.lat, lng: origin.lng}));
 
 addshops(map,shops,shops_latlng);
+
+var radiusCircle = map.drawCircle({
+  lat: origin.lat,
+    lng: origin.lng,
+    radius: radius*1000,
+    fillOpacity: 0.2,
+    fillColor: '#FF1212',
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+});
 </script>
+<% end %>
