@@ -2409,22 +2409,3 @@ return GMaps;
 }));
 
 
-function addshops(map,shops,shops_latlng) {
-var shopIcon = '/assets/small-shop-icon.png';
-for(var i = 0; i < shops.length; i++) {
-  shops_latlng.push(new google.maps.LatLng({lat: parseFloat(shops[i].latitude), lng: parseFloat(shops[i].longitude)}));
-  map.addMarker({
-    lat: shops[i].latitude,
-    lng: shops[i].longitude,
-    title: shops[i].name,
-    icon: shopIcon,
-    infoWindow: {
-      content: '<p><strong>'+shops[i].name + '</strong></p>' +
-    '<p>' + shops[i].address + '<br>' + shops[i].zip + ' ' + shops[i].city + '</p>' +
-    '<p>' + shops[i].latitude + ', ' + shops[i].longitude + '</p>'
-              
-    }
-  });
-}
-map.fitLatLngBounds(shops_latlng);
-}

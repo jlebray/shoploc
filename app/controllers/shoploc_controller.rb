@@ -4,6 +4,7 @@ class ShoplocController < ApplicationController
 
   def index
   end
+
   def list 
     @origin = Geokit::LatLng.new params[:latitude], params[:longitude]
     if params[:radius].present?

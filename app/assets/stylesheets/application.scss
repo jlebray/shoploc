@@ -26,6 +26,9 @@ nav {
   margin:10px;
 }
 
+thead th {
+text-align:center;
+}
 // add asterisk for required field
 label.required:after {
     content:" *";

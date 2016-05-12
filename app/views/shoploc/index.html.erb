@@ -1,83 +1,29 @@
-<%= stylesheet_link_tag    'shoploc', media: 'all', 'data-turbolinks-track' => true %>
-
 <div class='container text-xs-center'>
   <div class="row">
-    <h2>Search shops by :</h2>
+    <h2>Search shops :</h2>
   </div>
-  <div class='row'>
-    <div class='col-md-4 border' style="height: 300px">
-      <h3> location </h3>
+  <div class='row' >
+    <div class='col-md-8 border' >
       <div class="map-container">
-        <div id="map" style="height: 200px"></div>
+        <div id="map-index" style="height: 400px"></div>
       </div>
-      <p><strong>Your latitude : </strong><span id="latitude-loc"></span></p>
-      <p><strong>Your longitude : </strong><span id="longitude-loc"></span></p>
+      </div>
+    <div class='col-md-4 border' >
+      <%= button_tag "Set on your position", id: 'geoloc', class: "btn btn-primary" %>
       <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
-        <%= f.hidden_field :latitude, id: 'latitude-loc_field' %>  
-        <%= f.hidden_field :longitude, id: 'longitude-loc_field' %>  
-        <%= f.number_field :radius, step: 'any' %>
-        <%= f.number_field :numberOfShops, value: 5 %>
+          <%= f.number_field :latitude, step: 'any', required: true %>  
+          <%= f.number_field :longitude, step: 'any', required: true %>  
+        <%= f.number_field :radius, step: '0.001', value: 10 %>
+        <%= f.number_field :numberOfShops %>
         <%= f.form_group do %>
           <%= f.submit  'Search'%>
         <% end %>
       <% end %>
     </div>
-    <div class='col-md-4'>
-      <h3>address</h3>
-    </div>
-    <div class='col-md-4'>
-      <h3>coordinates</h3>
-      <div class="text-xs-left">
-        <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
-          <%= f.number_field :latitude, step: '0.01' %>  
-          <%= f.number_field :longitude, step: '0.01' %>  
-          <%= f.number_field :radius, step: 'any' %>
-          <%= f.number_field :numberOfShops, value: 5 %>
-          <%= f.form_group do %>
-            <%= f.submit  'Search'%>
-          <% end %>
-        <% end %>
       </div>
-    </div>
   </div>
 </div>                               
-<script>
-  var map = new GMaps({
-    div: '#map',
-      lat: 48,
-      lng: 2
-  });
-GMaps.geolocate({
-  success: function(position) {
-    map.setCenter(position.coords.latitude, position.coords.longitude);
-    $("#latitude-loc").text(position.coords.latitude);
-    $("#longitude-loc").text(position.coords.longitude);
-    $("#latitude-loc_field").val(position.coords.latitude);
-    $("#longitude-loc_field").val(position.coords.longitude);
-    map.addMarker({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-      title: 'Your position',
-      infoWindow: {
-        content: 'Your position'
-      }
-    });
-  },
-  error: function(error) {
-    alert('Geolocation failed: '+error.message);
-  },
-  not_supported: function() {
-    alert("Your browser does not support geolocation");
-  },
-});
-var radiusCircle = map.drawCircle({
-  lat: origin.lat,
-    lng: origin.lng,
-    radius: 0,
-    fillOpacity: 0.2,
-    fillColor: '#FF1212',
-    strokeColor: '#FF0000',
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-});
+<%= javascript_tag "var shops = #{@shops.to_json}" %>
+<script>mapIndex(shops);
 </script>
+
