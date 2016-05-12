@@ -5,25 +5,42 @@
   <div class='row' >
     <div class='col-md-8 border' >
       <div class="map-container">
-        <div id="map-index" style="height: 400px"></div>
+        <div id="map" style="height: 400px"></div>
       </div>
-      </div>
+    </div>
     <div class='col-md-4 border' >
       <%= button_tag "Set on your position", id: 'geoloc', class: "btn btn-primary" %>
       <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
-          <%= f.number_field :latitude, step: 'any', required: true %>  
-          <%= f.number_field :longitude, step: 'any', required: true %>  
-        <%= f.number_field :radius, step: '0.001', value: 10 %>
-        <%= f.number_field :numberOfShops %>
+        <%= f.number_field :latitude, step: 'any', required: true %>  
+        <%= f.number_field :longitude, step: 'any', required: true %>  
+        <%= f.number_field :radius, step: '0.001', value: @radius || 10 %>
+        <%= f.number_field :numberOfShops, label: 'Number of shops' %>
         <%= f.form_group do %>
           <%= f.submit  'Search'%>
         <% end %>
       <% end %>
     </div>
-      </div>
   </div>
-</div>                               
+  <% unless @shops.nil? %>
+    <% if @shops.empty? %>
+      <div class='row'>
+        <h1 class='text-xs-center'>No shops found</h1>
+      </div>
+    <% else %>
+      <%= render 'list' %>
+    <% end %>
+  <% end %>
+</div>
 <%= javascript_tag "var shops = #{@shops.to_json}" %>
-<script>mapIndex(shops);
+<%= javascript_tag "var origin = #{@origin.to_json}" %>
+<%= javascript_tag "var radius = #{@radius}" %>
+<script>
+  $(document).ready(function() {
+    <% unless @origin.nil? %>
+      mapIndex(shops, origin, 1000*radius);
+<% else %>
+      mapIndex(shops);
+<% end %>
+  });
 </script>
 
