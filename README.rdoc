@@ -1,28 +1,37 @@
-== README
+== Shoploc
 
 This is a project done as an exercise for Shopmium
 
+Ruby version : 2.3.0
+Rails version : 4.2.6
 
-Things you may want to cover:
+Gem used :
+  'sqlite3'
+  'sprockets-rails'
+  'boottstrap'
+  'rails-assets-tether'
+  'bootstrap_form'
+  'autoprefixer-rails'
+  'uglifier'
+  'geokit'
+  'geokit-rails'
+  'jquery-rails'
+  'turbolinks'
+  'jbuilder' 2.0'
+  'sdoc' 0.4.0
+  'byebug'
+  'web-console' 2.0
+  'spring'
 
-* Ruby version
+Rake task :
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To import a CSV file of shops type
+  rake importshops[file_path]
+  
+To use the default CSV file just type
+  rake importshops
+  
+To launch the application do :
+  rails s
+and go to
+  localhost:3000
