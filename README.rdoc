@@ -32,6 +32,7 @@ To use the default CSV file just type
   rake importshops
   
 To launch the application do :
+  bundle install
   rails s
 and go to
   localhost:3000
