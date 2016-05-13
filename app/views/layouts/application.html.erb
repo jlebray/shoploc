@@ -4,18 +4,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Shoploc</title>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-<%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%# Include Google Maps API %>
+    <%= javascript_include_tag 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBGGotBcshdm4SY_15htqdy-ur_LQov8xI' %>
+    <%= csrf_meta_tags %>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-<body>
-  <%= render 'shared/navigation' %>
-  <div class='container-fluid'>
+  <body>
+    <%= render 'shared/navigation' %>
+    <div class='container-fluid'>
 
-    <%= yield %>
+      <%= yield %>
 
-  </div>
-</body>
+    </div>
+  </body>
 </html>

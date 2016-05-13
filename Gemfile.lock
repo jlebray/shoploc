@@ -152,7 +152,6 @@ DEPENDENCIES
   bootstrap
   bootstrap_form
   byebug
-  coffee-rails (~> 4.1.0)
   geokit
   geokit-rails
   jbuilder (~> 2.0)

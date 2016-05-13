@@ -1,6 +1,9 @@
+// Handles the map
+
 
 var shopIcon = '/assets/small-shop-icon.png';
 
+// Creates a map on the #map div and show the search results if origin parameter is present
 function mapIndex(shops, origin, radius) {
 
   var map = new GMaps({
@@ -8,7 +11,8 @@ function mapIndex(shops, origin, radius) {
       lat: (origin || {lat: 48}).lat,
       lng: (origin || {lng: 2}).lng
   });
-$("#map").resizable();
+
+  // User location variables and marker
   var userLat = 0, userLng = 0;
   var userMarker = map.addMarker({
     lat: 0,
@@ -19,6 +23,7 @@ $("#map").resizable();
       }
     });
 
+  // Circle initialisation, with its marker
   var radiusCircle = map.drawCircle({
       lat: (origin || {lat: 48}).lat,
       lng: (origin || {lng: 2}).lng,
@@ -39,7 +44,7 @@ $("#map").resizable();
       }
   })
 
-
+// Geolocalisation function to get user position
   $("#geoloc").click( function() {
 
     GMaps.geolocate({
@@ -74,6 +79,8 @@ $("#map").resizable();
     });
 
   });
+
+  // If origin parameter is present, show the results. If not initialise on user position
   if (typeof origin == 'undefined') { 
     $("#geoloc").click();
   } else {
@@ -95,21 +102,27 @@ $("#map").resizable();
 
 
 
-
-  $("#radius").change( function() {
+// If fields values are changed, apply changes on the map
+  $(".form-control").change( function() {
+        radiusCircle.setCenter({
+          lat: parseFloat($("#latitude").val()),
+        lng: parseFloat($("#longitude").val())
+        });
     radiusCircle.setRadius(1000 * parseFloat($("#radius").val()));
+        circleMarker.setPosition({
+          lat: radiusCircle.getCenter().lat(),
+          lng: radiusCircle.getCenter().lng()});
     map.fitBounds(radiusCircle.getBounds());
   });
 
+  // Events for the edition of the circle
   google.maps.event.addListener(radiusCircle, 'center_changed', function()   
       {
         $("#latitude").val(radiusCircle.getCenter().lat());
         $("#longitude").val(radiusCircle.getCenter().lng());
-        debugger;
         circleMarker.setPosition({
           lat: radiusCircle.getCenter().lat(),
           lng: radiusCircle.getCenter().lng()});
-        debugger;
       });  
   google.maps.event.addListener(radiusCircle, 'radius_changed', function()   
       {  
@@ -122,6 +135,7 @@ $("#map").resizable();
       });  
 }
 
+// Add shops LatLng to an array and add shop markers to the map
 function addshops(map,shops,shops_latlng) {
   for(var i = 0; i < shops.length; i++) {
     shops_latlng.push(new google.maps.LatLng({lat: parseFloat(shops[i].latitude), lng: parseFloat(shops[i].longitude)}));
@@ -130,6 +144,7 @@ function addshops(map,shops,shops_latlng) {
   map.fitLatLngBounds(shops_latlng);
 }
 
+// Add a shop marker to the map
 function shopMarker(map, shop) {
   map.addMarker({
     lat: shop.latitude,
@@ -144,35 +159,3 @@ function shopMarker(map, shop) {
   });
 }
 
-function mapList() {
-  var map = new GMaps({
-    div: '#map',
-      lat: origin.lat,
-      lng: origin.lng
-  });
-
-  var userMarker = map.addMarker({
-    lat: origin.lat,
-      lng: origin.lng,
-      title: 'Your position',
-      infoWindow: {
-        content: 'Your position'
-      }
-  });
-
-  var shops_latlng = []; 
-  shops_latlng.push(new google.maps.LatLng({lat: origin.lat, lng: origin.lng}));
-
-  addshops(map,shops,shops_latlng);
-
-  var radiusCircle = map.drawCircle({
-    lat: origin.lat,
-      lng: origin.lng,
-      radius: radius*1000,
-      fillOpacity: 0.2,
-      fillColor: '#FF1212',
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-  });
-}

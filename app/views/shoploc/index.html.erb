@@ -11,8 +11,8 @@
     <div class='col-md-4 border' >
       <%= button_tag "Set on your position", id: 'geoloc', class: "btn btn-primary" %>
       <%= bootstrap_form_tag(layout: :horizontal, label_col: 'col-md-6', control_col: 'col-md-6') do |f| %>
-        <%= f.number_field :latitude, step: 'any', required: true %>  
-        <%= f.number_field :longitude, step: 'any', required: true %>  
+        <%= f.number_field :latitude, step: 'any', in: -90..90, required: true %>  
+        <%= f.number_field :longitude, step: 'any', in: -180..180, required: true %>  
         <%= f.number_field :radius, step: '0.001', value: @radius || 10 %>
         <%= f.number_field :numberOfShops, label: 'Number of shops' %>
         <%= f.form_group do %>
@@ -31,6 +31,7 @@
     <% end %>
   <% end %>
 </div>
+<%# Sends the parameters to Javascript %>
 <%= javascript_tag "var shops = #{@shops.to_json}" %>
 <%= javascript_tag "var origin = #{@origin.to_json}" %>
 <%= javascript_tag "var radius = #{@radius}" %>

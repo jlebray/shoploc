@@ -62,6 +62,8 @@ class ShopsController < ApplicationController
     end
   end
 
+  # GET /map
+  # Show all shops on a map
   def map
     @shops = Shop.all
   end

@@ -1,3 +1,6 @@
+// JS library to simplify Google Maps API use
+
+
 "use strict";
 (function(root, factory) {
   if(typeof exports === 'object') {
