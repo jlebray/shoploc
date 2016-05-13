@@ -23,16 +23,15 @@ Gem used :
   'web-console' 2.0
   'spring'
 
-Rake task :
-
-To import a CSV file of shops type
-  rake importshops[file_path]
-  
-To use the default CSV file just type
-  rake importshops
-  
 To launch the application do :
   bundle install
+  rake db:migrate
   rails s
 and go to
   localhost:3000
+
+To import a CSV file of shops :
+  rake importshops[file_path]
+  
+To use the default CSV file :
+  rake importshops
