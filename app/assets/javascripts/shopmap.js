@@ -8,7 +8,7 @@ function mapIndex(shops, origin, radius) {
       lat: (origin || {lat: 48}).lat,
       lng: (origin || {lng: 2}).lng
   });
-
+$("#map").resizable();
   var userLat = 0, userLng = 0;
   var userMarker = map.addMarker({
     lat: 0,
@@ -31,6 +31,13 @@ function mapIndex(shops, origin, radius) {
       draggable: true,
       editable:true
   });
+  var circleMarker = map.addMarker({
+      lat: (origin || {lat: 48}).lat,
+      lng: (origin || {lng: 2}).lng,
+      infoWindow: {
+        content: '<p>Search location</p>'
+      }
+  })
 
 
   $("#geoloc").click( function() {
@@ -46,7 +53,13 @@ function mapIndex(shops, origin, radius) {
           lat: userLat,
                    lng: userLng,
         });
+    userMarker.infoWindow.setContent(
+        '<p>Your position</p><p>' + userLat + ', ' + userLng + '</p>'
+        );
         radiusCircle.setCenter({
+          lat: userLat,
+          lng: userLng});
+        circleMarker.setPosition({
           lat: userLat,
           lng: userLng});
         map.fitBounds(radiusCircle.getBounds());
@@ -90,8 +103,13 @@ function mapIndex(shops, origin, radius) {
 
   google.maps.event.addListener(radiusCircle, 'center_changed', function()   
       {
-        $("#latitude").val(radiusCircle.getCenter().lat);
-        $("#longitude").val(radiusCircle.getCenter().lng);
+        $("#latitude").val(radiusCircle.getCenter().lat());
+        $("#longitude").val(radiusCircle.getCenter().lng());
+        debugger;
+        circleMarker.setPosition({
+          lat: radiusCircle.getCenter().lat(),
+          lng: radiusCircle.getCenter().lng()});
+        debugger;
       });  
   google.maps.event.addListener(radiusCircle, 'radius_changed', function()   
       {  
